@@ -1,5 +1,6 @@
 package com.bosch.example.backenduserapp.controller;
 
+import com.bosch.example.backenduserapp.model.dtos.UserDto;
 import com.bosch.example.backenduserapp.model.entities.User;
 import com.bosch.example.backenduserapp.services.UserService;
 import jakarta.validation.Valid;
@@ -24,13 +25,13 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> findAll() {
+    public List<UserDto> findAll() {
         return userService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
-        Optional<User> userOptional = userService.findById(id);
+    public ResponseEntity<?> findById(@PathVariable Long id) {
+        Optional<UserDto> userOptional = userService.findById(id);
 
         return userOptional.isPresent()
                 ? ResponseEntity.ok(userOptional.orElseThrow())
@@ -48,11 +49,11 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@Valid @RequestBody User user, BindingResult result, @PathVariable Long id) {
+    public ResponseEntity<?> update(@RequestBody User user, BindingResult result, @PathVariable Long id) {
         if (result.hasErrors()) {
             return validation(result);
         }
-        Optional<User> userOptional = userService.update(user, id);
+        Optional<UserDto> userOptional = userService.update(user, id);
         if (userOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(userOptional.orElseThrow());
         }
@@ -62,7 +63,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id) {
-        Optional<User> userOptional = userService.findById(id);
+        Optional<UserDto> userOptional = userService.findById(id);
         if (userOptional.isPresent()) {
             userService.deleteById(id);
             return ResponseEntity.noContent().build(); // 204

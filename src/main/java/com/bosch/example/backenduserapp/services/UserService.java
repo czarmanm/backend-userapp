@@ -1,18 +1,19 @@
 package com.bosch.example.backenduserapp.services;
 
+import com.bosch.example.backenduserapp.model.dtos.UserDto;
 import com.bosch.example.backenduserapp.model.entities.User;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    List<User> findAll();
+    List<UserDto> findAll();
 
-    Optional<User> findById(Long id);
+    Optional<UserDto> findById(Long id);
 
-    User save(User user);
+    UserDto save(User user);
 
-    Optional<User> update(User user, Long id);
+    Optional<UserDto> update(User user, Long id);
 
     void deleteById(Long id);
 }
