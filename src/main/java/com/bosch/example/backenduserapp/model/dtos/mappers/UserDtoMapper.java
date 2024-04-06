@@ -6,8 +6,6 @@ import com.bosch.example.backenduserapp.model.entities.User;
 
 public class UserDtoMapper {
 
-    private static UserDtoMapper userDtoMapper;
-
     private User user;
 
     private UserDtoMapper() {
@@ -15,13 +13,12 @@ public class UserDtoMapper {
     }
 
     public static UserDtoMapper builder() {
-        userDtoMapper = new UserDtoMapper();
-        return userDtoMapper;
+        return new UserDtoMapper();
     }
 
     public UserDtoMapper setUser(User user) {
         this.user = user;
-        return userDtoMapper;
+        return this;
     }
 
     public UserDto build() {
