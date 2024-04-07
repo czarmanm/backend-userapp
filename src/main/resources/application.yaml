@@ -10,6 +10,7 @@ spring:
     defer-datasource-initialization: true
     hibernate:
       ddl-auto: create-drop
+    open-in-view: false
 
   h2:
     console:
@@ -24,3 +25,4 @@ logging:
 
 server:
   port: 8081
+
